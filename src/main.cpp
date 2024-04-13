@@ -1,23 +1,26 @@
 #include "vex.h"
 
+#include "drivetrain.h"
+
 using namespace vex;
 
 // A global instance of competition
 competition Competition;
 
 void pre_auton(void) {
-
+  Brain.Screen.print("----- Omni-Directional Robot Vexcode -----");
+  Brain.Screen.print("-> Pre-autonomous");
 }
 
 void autonomous(void) {
-  
+  Brain.Screen.print("-> Autonomous");
 }
 
 void usercontrol(void) {
-  while (1) {
+  Brain.Screen.print("-> Driver Control");
 
-    wait(20, msec);
-  }
+  Drivetrain drivetrain;
+  drivetrain.enableControllerMovement();
 }
 
 int main() {
