@@ -46,17 +46,17 @@ void Drivetrain::updateDriveMotors(){
   }
 
   if (std::abs(turning_axis_value) > turning_deadband) { // Turning
-    front_left_motor_velocity += drive_axis_value;
-    front_right_motor_velocity -= drive_axis_value;
-    back_left_motor_velocity += drive_axis_value;
-    back_right_motor_velocity -= drive_axis_value;
+    front_left_motor_velocity += turning_axis_value;
+    front_right_motor_velocity -= turning_axis_value;
+    back_left_motor_velocity += turning_axis_value;
+    back_right_motor_velocity -= turning_axis_value;
   }
 
   if ((std::abs(strafe_axis_value) > strafe_deadband)) { // Left and Right
-    front_left_motor_velocity += drive_axis_value;
-    front_right_motor_velocity += drive_axis_value;
-    back_left_motor_velocity -= drive_axis_value;
-    back_right_motor_velocity -= drive_axis_value;
+    front_left_motor_velocity -= strafe_axis_value;
+    front_right_motor_velocity += strafe_axis_value;
+    back_left_motor_velocity += strafe_axis_value;
+    back_right_motor_velocity -= strafe_axis_value;
   }
 
   // Update the motors to be the computed velocity

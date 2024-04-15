@@ -9,15 +9,19 @@ competition Competition;
 
 void pre_auton(void) {
   Brain.Screen.print("----- Omni-Directional Robot Vexcode -----");
+  Brain.Screen.newLine();
   Brain.Screen.print("-> Pre-autonomous");
+  Brain.Screen.newLine();
 }
 
 void autonomous(void) {
   Brain.Screen.print("-> Autonomous");
+  Brain.Screen.newLine();
 }
 
 void usercontrol(void) {
   Brain.Screen.print("-> Driver Control");
+  Brain.Screen.newLine();
 
   Drivetrain drivetrain;
   drivetrain.enableControllerMovement();
