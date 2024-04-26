@@ -3,7 +3,7 @@
 class Drivetrain
 {
   public:
-    void enableControllerMovement();
+    static void setup();
 
   private:
     static void updateDriveMotors();

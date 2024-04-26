@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-void Drivetrain::enableControllerMovement(){
+void Drivetrain::setup(){
   // setup drive callbacks
   Controller1.Axis1.changed(updateDriveMotors);
   Controller1.Axis3.changed(updateDriveMotors);
@@ -30,9 +30,9 @@ void Drivetrain::updateDriveMotors(){
   float back_right_motor_velocity = 0;
 
   // Multiply the inputs by the speed in settings
-  drive_axis_value *= movement_speed_multiplier;
-  turning_axis_value *= turning_speed_multiplier;
-  strafe_axis_value *= strafe_speed_multiplier;
+  drive_axis_value *= movement_speed;
+  turning_axis_value *= turning_speed;
+  strafe_axis_value *= strafe_speed;
 
 
   // Set the speed of the motor only if the value is more than the deadband.

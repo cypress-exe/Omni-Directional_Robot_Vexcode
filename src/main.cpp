@@ -1,6 +1,7 @@
 #include "vex.h"
 
 #include "drivetrain.h"
+#include "functions.h"
 
 using namespace vex;
 
@@ -23,8 +24,8 @@ void usercontrol(void) {
   Brain.Screen.print("-> Driver Control");
   Brain.Screen.newLine();
 
-  Drivetrain drivetrain;
-  drivetrain.enableControllerMovement();
+  Drivetrain::setup();
+  Functions::setup();
 }
 
 int main() {

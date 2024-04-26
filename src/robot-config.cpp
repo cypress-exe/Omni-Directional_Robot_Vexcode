@@ -17,3 +17,6 @@ motor FrontLeftDriveMotor = motor(PORT20, ratio18_1, false);
 motor FrontRightDriveMotor = motor(PORT11, ratio18_1, true);
 motor BackLeftDriveMotor = motor(PORT10, ratio18_1, false);
 motor BackRightDriveMotor = motor(PORT1, ratio18_1, true);
+
+motor LeftCaptureMotor = motor(PORT19, ratio18_1, false);
+motor RightCaptureMotor = motor(PORT12, ratio18_1, true);

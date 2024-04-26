@@ -6,10 +6,20 @@ const int turning_deadband = 5;
 const int strafe_deadband = 10;
 
 // Speed of the movement of the robot (not strafing)
-const float movement_speed_multiplier = 1;
+const float movement_speed = 1;
 
 // Speed of the turning of the robot
-const float turning_speed_multiplier = 0.5;
+const float turning_speed = 0.5;
 
 // Speed of the strafe movement of the robot
-const float strafe_speed_multiplier = 0.7;
+const float strafe_speed = 0.7;
+
+// Speed of the capture motors
+const float capture_motors_speed = 100;
+
+// Step speed of the capture motors in manual mode
+const float capture_motors_manual_speed = 50;
+
+// Capture Motor Positions
+const float capture_motor_open_position = 120;
+const float capture_motor_closed_position = 0;
