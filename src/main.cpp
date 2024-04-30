@@ -9,20 +9,16 @@ using namespace vex;
 competition Competition;
 
 void pre_auton(void) {
-  Brain.Screen.print("----- Omni-Directional Robot Vexcode -----");
-  Brain.Screen.newLine();
-  Brain.Screen.print("-> Pre-autonomous");
-  Brain.Screen.newLine();
+  log_brain("----- Omni-Directional Robot Vexcode -----");
+  log_brain("-> Pre Autonomous");
 }
 
 void autonomous(void) {
-  Brain.Screen.print("-> Autonomous");
-  Brain.Screen.newLine();
+  log_brain("-> Autonomous");
 }
 
 void usercontrol(void) {
-  Brain.Screen.print("-> Driver Control");
-  Brain.Screen.newLine();
+  log_brain("-> Driver Control");
 
   Drivetrain::setup();
   Functions::setup();

@@ -1,3 +1,3 @@
 #pragma once
 
-extern void log_brain(char*);
+extern void log_brain(const char*);

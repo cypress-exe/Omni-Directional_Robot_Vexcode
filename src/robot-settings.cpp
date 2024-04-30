@@ -21,5 +21,5 @@ const float capture_motors_speed = 100;
 const float capture_motors_manual_speed = 50;
 
 // Capture Motor Positions
-const float capture_motor_open_position = 120;
+const float capture_motor_open_position = 180;
 const float capture_motor_closed_position = 0;

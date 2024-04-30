@@ -11,6 +11,9 @@ void Drivetrain::setup(){
   Controller1.Axis1.changed(updateDriveMotors);
   Controller1.Axis3.changed(updateDriveMotors);
   Controller1.Axis4.changed(updateDriveMotors);
+
+  // log this action
+  log_brain("-> Drivetrain Setup");
 }
 
 void Drivetrain::updateDriveMotors(){
