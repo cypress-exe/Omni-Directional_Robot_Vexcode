@@ -6,13 +6,12 @@
 
 void Functions::setup()
 {
-  // Map the keys to Functions::updateFunctionMotors()
-  Controller1.ButtonL1.pressed(updateFunctionMotors);
-  Controller1.ButtonL2.pressed(updateFunctionMotors);
-  Controller1.ButtonR1.pressed(updateFunctionMotors);
-  Controller1.ButtonR2.pressed(updateFunctionMotors);
+  // Map the keys to Functions::updateCaptureMotorsAutomaticMode()
+  Controller1.ButtonR1.pressed(updateCaptureMotorsAutomaticMode);
+  Controller1.ButtonR2.pressed(updateCaptureMotorsAutomaticMode);
 
-  Controller1.ButtonA.pressed(updateFunctionMotors);
+  Controller1.ButtonA.pressed(initCaptureMotorsManualMode);
+  Controller1.ButtonB.pressed(resetCaptureMotorCallibration);
 }
 
 // void Functions::setMotorToPosition(motor _motor, float target_rotation){
@@ -22,11 +21,44 @@ void Functions::setup()
 //   _motor.spinToPosition()
 // }
 
-void Functions::updateFunctionMotors()
+void Functions::updateCaptureMotorsAutomaticMode()
 {
   // Get the controller values
   bool A_pressed = Controller1.ButtonA.pressing();
-  bool B_pressed = Controller1.ButtonB.pressing();
+
+  bool R1_pressed = Controller1.ButtonR1.pressing();
+  bool R2_pressed = Controller1.ButtonR2.pressing();
+
+  // If A is pressed, then manual mode is active. Thus, stop here
+  if (A_pressed) return;
+
+  // Automatic Mode
+  if (R1_pressed && (!R2_pressed))
+  {
+    Brain.Screen.print("-> Open");
+    Brain.Screen.newLine();
+
+    LeftCaptureMotor.setVelocity(capture_motors_speed, percent);
+    RightCaptureMotor.setVelocity(capture_motors_speed, percent);
+
+    // Move the left motor to the negative open value, and the right motor to the positive open value
+    LeftCaptureMotor.spinToPosition(-capture_motor_closed_position, degrees, false);
+    RightCaptureMotor.spinToPosition(capture_motor_closed_position, degrees, true);
+  } else {
+    if (R2_pressed) {
+      Brain.Screen.print("-> Closed");
+      Brain.Screen.newLine();
+      LeftCaptureMotor.setVelocity(capture_motors_speed, percent);
+      RightCaptureMotor.setVelocity(capture_motors_speed, percent);
+      LeftCaptureMotor.spinToPosition(0, degrees, false);
+      RightCaptureMotor.spinToPosition(0, degrees, true);
+    }
+  }
+}
+
+void Functions::initCaptureMotorsManualMode(){
+  // Get the controller values
+  bool A_pressed = Controller1.ButtonA.pressing();
   
   bool L1_pressed = Controller1.ButtonL1.pressing();
   bool R1_pressed = Controller1.ButtonR1.pressing();
@@ -51,44 +83,19 @@ void Functions::updateFunctionMotors()
     // Set the motors to spin forward
     LeftCaptureMotor.spin(forward);
     RightCaptureMotor.spin(forward);
-  } else {
-    if (B_pressed) // Reset Button
-    {
-      LeftCaptureMotor.resetPosition();
-      RightCaptureMotor.resetPosition();
-      Brain.Screen.print("-> Reset Capture Motors Encoders to 0");
-      Brain.Screen.newLine();
-
-    } else {
-      LeftCaptureMotor.setVelocity(0, percent);
-      RightCaptureMotor.setVelocity(0, percent);
-
-      // Automatic Mode
-      if (R1_pressed && (!R2_pressed))
-      {
-        Brain.Screen.print("-> R1");
-        Brain.Screen.newLine();
-        LeftCaptureMotor.setVelocity(capture_motors_speed, percent);
-        RightCaptureMotor.setVelocity(capture_motors_speed, percent);
-        // Move the left motor to the negative open value, and the right motor to the positive open value
-        LeftCaptureMotor.spinToPosition(-capture_motor_closed_position, degrees, false);
-        RightCaptureMotor.spinToPosition(capture_motor_closed_position, degrees, true);
-      } else {
-        if (R2_pressed) {
-          Brain.Screen.print("-> R2");
-          Brain.Screen.newLine();
-          LeftCaptureMotor.setVelocity(capture_motors_speed, percent);
-          RightCaptureMotor.setVelocity(capture_motors_speed, percent);
-          LeftCaptureMotor.spinToPosition(0, degrees, false);
-          RightCaptureMotor.spinToPosition(0, degrees, true);
-        }
-      }
-    }
+    
+    // Re-call this function because the user should be able to just hold down the buttons
+    // And be able to control the motors smoothly
+    initCaptureMotorsManualMode();
   }
+}
 
-  // Re-call ourselves if A was pressed
-  if (A_pressed)
-  {
-    updateFunctionMotors(); // Call ourselves
-  }
+void Functions::resetCaptureMotorCallibration(){
+  // Reset the digital position of the motors
+  LeftCaptureMotor.resetPosition();
+  RightCaptureMotor.resetPosition();
+
+  // Log this action
+  Brain.Screen.print("-> Reset Capture Motors Encoders to 0");
+  Brain.Screen.newLine();
 }

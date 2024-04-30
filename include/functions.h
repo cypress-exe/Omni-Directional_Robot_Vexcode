@@ -4,7 +4,9 @@ class Functions
 {
   public:
     static void setup();
-    static void setMotorToPosition(motor, float);
+    static void setMotorToPosition(motor, float); // might be able to remove
   private:
-    static void updateFunctionMotors();
+    static void updateCaptureMotorsAutomaticMode();
+    static void initCaptureMotorsManualMode();
+    static void resetCaptureMotorCallibration();
 };
