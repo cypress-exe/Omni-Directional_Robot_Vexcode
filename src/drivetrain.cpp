@@ -60,6 +60,12 @@ void Drivetrain::updateDriveMotors(){
     front_right_motor_velocity += strafe_axis_value;
     back_left_motor_velocity += strafe_axis_value;
     back_right_motor_velocity -= strafe_axis_value;
+
+    // account for possible center of mass instability
+    front_left_motor_velocity += center_of_mass_correction * strafe_axis_value;
+    front_right_motor_velocity -= center_of_mass_correction * strafe_axis_value;
+    back_left_motor_velocity += center_of_mass_correction * strafe_axis_value;
+    back_right_motor_velocity -= center_of_mass_correction * strafe_axis_value;
   }
 
   // Update the motors to be the computed velocity

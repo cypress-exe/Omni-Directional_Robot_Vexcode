@@ -18,8 +18,13 @@ const float strafe_speed = 0.7;
 const float capture_motors_speed = 100;
 
 // Step speed of the capture motors in manual mode
-const float capture_motors_manual_speed = 50;
+const float capture_motors_manual_speed = 10;
 
 // Capture Motor Positions
 const float capture_motor_open_position = 180;
 const float capture_motor_closed_position = 0;
+
+// Corrects the center of mass being not centered (too forward / backward)
+// Positive number for it being too far forward, and
+// Negative number for it being too far backward
+const float center_of_mass_correction = 0; //untested

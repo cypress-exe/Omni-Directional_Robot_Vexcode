@@ -12,3 +12,5 @@ extern const float capture_motors_manual_speed;
 
 extern const float capture_motor_open_position;
 extern const float capture_motor_closed_position;
+
+extern const float center_of_mass_correction;
